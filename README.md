@@ -1,7 +1,7 @@
 # OpenSupports Application Build & Deployment Documentation
 
 ## Overview
-### **OpenSupports** : 
+**OpenSupports** : 
     OpenSupports is a simple, open-source ticket system for managing customer support queries. It features easy ticket management, user roles, and email notifications. It's ideal for small to medium-sized businesses needing a straightforward support solution.
 
 This documentation outlines the deployment of the OpenSupports application using AWS CloudFormation and a CI/CD pipeline. The project provisions necessary AWS infrastructure and automates deployment across multiple environments (development, staging, production).
