@@ -127,3 +127,17 @@ By using child templates, the pipeline allows reusability and modularity in Clou
 
 ## SNS Topic and Email Notifications
 The **SNS Topic** is used to send notifications for critical alarms (like CloudWatch alarms) or deployment status. These notifications can be sent via email to inform stakeholders of any issues or successful deployments.
+
+
+Steps to deploye application:
+
+1. Create Azure devops account, AWS account 
+2. Open Azure devops and create Pipeline, along with Create service connection to integrate with AWS.
+3. Note down all AWS keys, and variables need to give as pipeline secret variables, while creating pipeline give this secrets.
+4. Run the pipeline, check the stages are successfully completed or not and check email is sending notification or not.
+5. check application running or not by using "http://your-ec2-public-ip:your-port-number"
+Ex: 
+   ssh -i path/to/your/key.pem ubuntu@your-ec2-public-ip
+   curl http://localhost:your-port-number
+   systemctl status your-service-name
+
