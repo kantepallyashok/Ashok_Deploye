@@ -122,7 +122,7 @@ The CI/CD pipeline automates the build and deployment process for the OpenSuppor
      - **Staging**: Uses `staging-parameters.yaml` for staging environment deployment.  
      - **Production**: Uses `prod-parameters.yaml` for the production environment.
 
-## Advantages of Child Templates
+## Advantages of Child Templates(CI_CD\deploy-template.yaml)
 By using child templates, the pipeline allows reusability and modularity in CloudFormation deployments. This enables dynamic and environment-specific infrastructure provisioning without duplicating the entire template for each environment.
 
 ## SNS Topic and Email Notifications
