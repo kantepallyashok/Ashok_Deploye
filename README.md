@@ -43,7 +43,7 @@ This assignment involves the development of **CloudFormation templates** to prov
     - After staging stage gets success, it will wait for approval from 2 users, for 60 minutes,
       if 2 users  didnt respond, it will send notification to entire team mail, and someone has to approve manulaly. if deployement fails, it sends notification.
 
-    - Initially only 2 users ( Manager, TL) will have access to approve.No other tem member will get access for first 60 minutes.
+    - Initially only 2 users ( Manager, TL) will have access to approve.No other team member will get access for first 60 minutes.
     -  After 60 minutes, on demand case we can enable team members permissions, and get approval.
 
 ## CloudFormation Templates (Infrastructure.yaml)
@@ -126,7 +126,7 @@ The CI/CD pipeline automates the build and deployment process for the OpenSuppor
      - **Production**: Uses `prod-parameters.yaml` for the production environment.
 
 ## Advantages of Child Templates(CI_CD\deploy-template.yaml)
-By using child templates, the pipeline allows reusability and modularity in CloudFormation deployments. This enables dynamic and environment-specific infrastructure provisioning without duplicating the entire template for each environment.
+By using child templates, the pipeline allows reusability and modularity in application deployments. This enables dynamic and environment-specific infrastructure provisioning without duplicating the entire template for each environment.
 
 ## SNS Topic and Email Notifications
 The **SNS Topic** is used to send notifications for critical alarms (like CloudWatch alarms) or deployment status. These notifications can be sent via email to inform stakeholders of any issues or successful deployments.
