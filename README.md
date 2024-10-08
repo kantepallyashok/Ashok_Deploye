@@ -147,29 +147,31 @@ Ex:
 # **Cost Optimization Suggestions for AWS CloudFormation Template**
 To make the AWS CloudFormation template more cost-effective while maintaining security and management features, here are some suggestions:
 
-### **1. Instance Sizing and Auto-Scaling**
+## **Instance Sizing and Auto-Scaling:**
+
 - Replace fixed EC2 instance types (`InstanceType: !Ref InstanceType`) with a parameterized or spot instance option, or use **Auto Scaling Groups (ASGs)** to manage scaling based on demand.
-- Consider using **EC2 Spot Instances** for workloads that are flexible in terms of start and stop times to save costs.
-- Right-size your instances by selecting smaller instance types where applicable (e.g., t3.medium instead of m5.large).
-  
-### **2. Optimize Storage Costs**
-- Use **Amazon S3 Standard-IA** (Infrequent Access) or **Glacier** for long-term storage of static files that aren't accessed frequently.
-- Implement **Lifecycle Policies** in S3 to transition objects to more cost-efficient storage classes based on their access frequency.
+- You can add the option for **EC2 Spot Instances** if workloads allow. Spot instances are significantly cheaper than on-demand instances.
 
-### **3. Leverage Reserved Instances and Savings Plans**
-- Use **Reserved Instances** or **Savings Plans** for long-term workloads to get significant discounts compared to on-demand pricing.
-  
-### **4. Minimize Data Transfer Costs**
-- Design your architecture to minimize **cross-region traffic** to avoid additional data transfer costs.
-- Use **VPC Endpoints** to privately connect VPC resources to AWS services without using the public internet, which can reduce NAT Gateway data transfer charges.
+## **RDS Optimizations:**
 
-## **Main Contents**
+- Consider using **Amazon RDS Aurora** instead of standard RDS for potentially better cost-performance optimization, especially for MySQL workloads.
+- Enable **RDS Multi-AZ** deployment only if required for production. In development or staging environments, a single instance is more cost-effective.
+- Scale down **AllocatedStorage** for RDS to the minimum required size or utilize **RDS storage autoscaling**.
 
-### **[CloudFormation Templates]**
-The CloudFormation template (`opensupports/cf_templates/templates/Infrastructure.yaml`) mainly has 3 blocks to deploy the infrastructure:
-  - **Resources**  
-  - **Parameters**  
-  - **Outputs**
+## **S3 Bucket and CloudFront:**
 
-- **AWS CF templates** are reusable templates; by passing parameters, we can create multiple environments.  
-- The folder structure defines CF templates, and by passing different parameters (from `opensupports/cf_templates/parameters/*.yaml` files), we can create multiple environments.
+- Use **S3 Intelligent-Tiering** for cost-optimized storage based on access patterns if your bucket stores files that are accessed less frequently.
+- If your application needs to serve static files globally, consider adding **CloudFront** in front of the S3 bucket to minimize bandwidth costs.
+
+## **Use Reserved Instances (RI) or Savings Plans:**
+
+- For long-running workloads, use **Reserved Instances** or **Savings Plans** to save up to 72% on EC2 and RDS compared to on-demand instances.
+
+## **CloudWatch and Monitoring:**
+
+- Review the frequency of **CloudWatch metrics** (e.g., period = 300 seconds). Lowering the monitoring frequency can reduce costs.
+- Consider consolidating **CloudWatch alarms** and using **Composite Alarms** to minimize the number of active alarms.
+
+## **Security Groups:**
+
+- Review your **Security Groups** for unnecessary open ports (e.g., open SSH to 0.0.0.0/0). Instead, restrict access to specific IPs or use **AWS Systems Manager Session Manager** for secure SSH access without needing port 22 open.
