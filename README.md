@@ -144,3 +144,32 @@ Ex:
    - curl http://localhost:your-port-number
    - systemctl status your-service-name
 
+## **Cost Optimization Suggestions for AWS CloudFormation Template**
+To make the AWS CloudFormation template more cost-effective while maintaining security and management features, here are some suggestions:
+
+### **1. Instance Sizing and Auto-Scaling**
+- Replace fixed EC2 instance types (`InstanceType: !Ref InstanceType`) with a parameterized or spot instance option, or use **Auto Scaling Groups (ASGs)** to manage scaling based on demand.
+- Consider using **EC2 Spot Instances** for workloads that are flexible in terms of start and stop times to save costs.
+- Right-size your instances by selecting smaller instance types where applicable (e.g., t3.medium instead of m5.large).
+  
+### **2. Optimize Storage Costs**
+- Use **Amazon S3 Standard-IA** (Infrequent Access) or **Glacier** for long-term storage of static files that aren't accessed frequently.
+- Implement **Lifecycle Policies** in S3 to transition objects to more cost-efficient storage classes based on their access frequency.
+
+### **3. Leverage Reserved Instances and Savings Plans**
+- Use **Reserved Instances** or **Savings Plans** for long-term workloads to get significant discounts compared to on-demand pricing.
+  
+### **4. Minimize Data Transfer Costs**
+- Design your architecture to minimize **cross-region traffic** to avoid additional data transfer costs.
+- Use **VPC Endpoints** to privately connect VPC resources to AWS services without using the public internet, which can reduce NAT Gateway data transfer charges.
+
+## **Main Contents**
+
+### **[CloudFormation Templates]**
+The CloudFormation template (`opensupports/cf_templates/templates/Infrastructure.yaml`) mainly has 3 blocks to deploy the infrastructure:
+  - **Resources**  
+  - **Parameters**  
+  - **Outputs**
+
+- **AWS CF templates** are reusable templates; by passing parameters, we can create multiple environments.  
+- The folder structure defines CF templates, and by passing different parameters (from `opensupports/cf_templates/parameters/*.yaml` files), we can create multiple environments.
